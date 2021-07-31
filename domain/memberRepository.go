@@ -19,7 +19,7 @@ func (m IMemberDbAdapter) FindAll(pagination helper.PaginationRequest) ([]Member
 	members := make([]Member, 0)
 
 	findAllSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address, phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member`
-	whereSql := " WHERE " + pagination.Filter.Field + " LIKE " + "'%" + pagination.Filter.Value + "%'"
+	whereSql := " WHERE " + pagination.Filter.Field + " LIKE " + "'%" + pagination.Filter.Value + "%' " + "AND deleted_at IS NULL"
 	orderSql := " ORDER BY " + pagination.Order.Field + " " + pagination.Order.Direction + " "
 	limitSql := " LIMIT " + strconv.Itoa(page) + ", " + strconv.Itoa(size)
 
@@ -46,7 +46,7 @@ func (m IMemberDbAdapter) FindAll(pagination helper.PaginationRequest) ([]Member
 func (m IMemberDbAdapter) ById(id string) (*Member, *helper.AppError) {
 	var member Member
 	byIdSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address,
-			phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member ` + "WHERE id = UUID_TO_BIN(?)"
+			phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member ` + "WHERE id = UUID_TO_BIN(?)" + "AND deleted_at IS NULL"
 
 	err := m.client.Get(&member, byIdSql, id)
 	if err != nil {
@@ -98,6 +98,79 @@ func (m IMemberDbAdapter) Create(d Member) (*Member, *helper.AppError) {
 	fmt.Println(id)
 	d.MemberId = strconv.FormatInt(id, 10)
 	return &d, nil
+}
+
+func (m IMemberDbAdapter) Update(d Member) *helper.AppError {
+	fmt.Println("DATA :: ", d)
+	sqlUpdate := "UPDATE koperasi.member SET "
+	sqlWhere := "WHERE id = UUID_TO_BIN(?)"
+
+	if d.KTANumber != "" {
+		sqlUpdate = sqlUpdate + "kta_number = '" + d.KTANumber + "', "
+	}
+
+	if d.NIKNumber != "" {
+		sqlUpdate = sqlUpdate + "nik_number = '" + d.NIKNumber + "', "
+	}
+
+	if d.MemberName != "" {
+		sqlUpdate = sqlUpdate + "member_name = '" + d.MemberName + "', "
+	}
+
+	if d.DateOfBirth != "" {
+		sqlUpdate = sqlUpdate + "date_of_birth = '" + d.DateOfBirth + "', "
+	}
+
+	if d.PlaceOfBirth != "" {
+		sqlUpdate = sqlUpdate + "place_of_birth = '" + d.PlaceOfBirth + "', "
+	}
+
+	if d.Address != "" {
+		sqlUpdate = sqlUpdate + "address = '" + d.Address + "', "
+	}
+
+	if d.BusinessSector != "" {
+		sqlUpdate = sqlUpdate + "business_sector = '" + d.BusinessSector + "', "
+	}
+
+	if d.PhoneNumber != "" {
+		sqlUpdate = sqlUpdate + "phone_number = '" + d.PhoneNumber + "', "
+	}
+
+	if d.Status != "" {
+		sqlUpdate = sqlUpdate + "status = '" + d.Status + "', "
+	}
+
+	sqlUpdate = sqlUpdate + "updated_at = '" + d.UpdatedAt.String + "' "
+	sqlUpdate = sqlUpdate + sqlWhere
+	fmt.Println("SQL Query :: ", sqlUpdate)
+
+	_, err := m.client.Exec(sqlUpdate, d.MemberId)
+	if err != nil {
+		fmt.Println("Error when updating a record :: " + err.Error())
+		return helper.UnexpectedError("Unexpected error occured from database")
+	}
+
+	return nil
+}
+
+func (m IMemberDbAdapter) SoftDelete(d Member) *helper.AppError {
+	fmt.Println("DATA :: ", d)
+	sqlUpdate := "UPDATE koperasi.member SET "
+	sqlWhere := "WHERE id = UUID_TO_BIN(?)"
+
+	sqlUpdate = sqlUpdate + "updated_at = '" + d.UpdatedAt.String + "', "
+	sqlUpdate = sqlUpdate + "deleted_at = '" + d.DeletedAt.String + "' "
+	sqlUpdate = sqlUpdate + sqlWhere
+	fmt.Println("SQL Query :: ", sqlUpdate)
+
+	_, err := m.client.Exec(sqlUpdate, d.MemberId)
+	if err != nil {
+		fmt.Println("Error when deleting a record :: " + err.Error())
+		return helper.UnexpectedError("Unexpected error occured from database")
+	}
+
+	return nil
 }
 
 func NewMemberRepository(db *sqlx.DB) IMemberDbAdapter {

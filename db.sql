@@ -17,23 +17,23 @@ CREATE TABLE `koperasi`.`member` (
   PRIMARY KEY (`id`));
 
 
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 1', '999999', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 2', '999998', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 3', '999997', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 4', '999996', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 5', '999995', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 6', '999994', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 7', '999993', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 8', '999992', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 9', '999991', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
-INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
-VALUES ('Sinar Dyas 10', '999990', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 1', '999999', '999999999', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 2', '999998', '888888888', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 3', '999997', '777777777', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 4', '999996', '666666666', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 5', '999995', '555555555', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 6', '999994', '444444444', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 7', '999993', '333333333', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 8', '999992', '222222222', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 9', '999991', '111111111', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');
+INSERT INTO `koperasi`.`member` (`member_name`, `kta_number`, `nik_number`,  `date_of_birth`, `place_of_birth`, `address`, `business_sector`, `phone_number`, `status`) 
+VALUES ('Sinar Dyas 10', '999990', '000000000', '1996-05-31', 'Karanganyar', 'Kab. Tangerang, Banten', 'Technology', '082227777619', '1');

@@ -92,3 +92,63 @@ func (mh *MemberHandler) Create(w http.ResponseWriter, r *http.Request) {
 		Data:   data,
 	})
 }
+
+func (mh *MemberHandler) Update(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	member_id := vars["member_id"]
+	var requstBody dto.MemberDto
+
+	err := json.NewDecoder(r.Body).Decode(&requstBody)
+	if err != nil {
+		response.Send(w, http.StatusInternalServerError, helper.Response{
+			Status: "ERROR",
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	requstBody.MemberId = member_id
+	data, appError := mh.Service.Update(requstBody)
+	if appError != nil {
+		response.Send(w, appError.Code, helper.Response{
+			Status: "ERROR",
+			Error:  appError.AsMessage(),
+		})
+		return
+	}
+
+	response.Send(w, http.StatusOK, helper.Response{
+		Status: "SUCCESS",
+		Data:   data,
+	})
+}
+
+func (mh *MemberHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	member_id := vars["member_id"]
+	var requstBody dto.MemberDto
+
+	err := json.NewDecoder(r.Body).Decode(&requstBody)
+	if err != nil {
+		response.Send(w, http.StatusInternalServerError, helper.Response{
+			Status: "ERROR",
+			Error:  err.Error(),
+		})
+		return
+	}
+
+	requstBody.MemberId = member_id
+	data, appError := mh.Service.Delete(requstBody)
+	if appError != nil {
+		response.Send(w, appError.Code, helper.Response{
+			Status: "ERROR",
+			Error:  appError.AsMessage(),
+		})
+		return
+	}
+
+	response.Send(w, http.StatusOK, helper.Response{
+		Status: "SUCCESS",
+		Data:   data,
+	})
+}

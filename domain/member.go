@@ -28,15 +28,8 @@ type IMember interface {
 	ById(id string) (*Member, *helper.AppError)
 	ByColumn(string, interface{}) (*Member, *helper.AppError, error)
 	Create(Member) (*Member, *helper.AppError)
-}
-
-func (m Member) statusToText() string {
-	statusToText := "active"
-	if m.Status == "0" {
-		statusToText = "inactive"
-	}
-
-	return statusToText
+	Update(Member) *helper.AppError
+	SoftDelete(Member) *helper.AppError
 }
 
 func (m Member) Convert() dto.MemberDto {
