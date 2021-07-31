@@ -1,1 +1,1 @@
-web: banking
+web: bin/banking

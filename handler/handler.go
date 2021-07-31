@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -13,5 +14,10 @@ func Start() {
 	router := mux.NewRouter()
 	route.MemberRouterHandling(router, dbConnection)
 
-	http.ListenAndServe(":3000", router)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9000" // Default port if not specified
+	}
+
+	http.ListenAndServe(":"+port, router)
 }
