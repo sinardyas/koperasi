@@ -18,7 +18,7 @@ func (m IMemberDbAdapter) FindAll(pagination helper.PaginationRequest) ([]Member
 	var size = pagination.Size
 	members := make([]Member, 0)
 
-	findAllSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address, phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member`
+	findAllSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address, phone_number, status, created_at, updated_at, deleted_at FROM api25o82ny8gixl4.member`
 	whereSql := " WHERE " + pagination.Filter.Field + " LIKE " + "'%" + pagination.Filter.Value + "%' " + "AND deleted_at IS NULL"
 	orderSql := " ORDER BY " + pagination.Order.Field + " " + pagination.Order.Direction + " "
 	limitSql := " LIMIT " + strconv.Itoa(page) + ", " + strconv.Itoa(size)
@@ -46,7 +46,7 @@ func (m IMemberDbAdapter) FindAll(pagination helper.PaginationRequest) ([]Member
 func (m IMemberDbAdapter) ById(id string) (*Member, *helper.AppError) {
 	var member Member
 	byIdSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address,
-			phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member ` + "WHERE id = UUID_TO_BIN(?)" + "AND deleted_at IS NULL"
+			phone_number, status, created_at, updated_at, deleted_at FROM api25o82ny8gixl4.member ` + "WHERE id = UUID_TO_BIN(?)" + "AND deleted_at IS NULL"
 
 	err := m.client.Get(&member, byIdSql, id)
 	if err != nil {
@@ -68,7 +68,7 @@ func (m IMemberDbAdapter) ByColumn(columnName string, value interface{}) (*Membe
 
 	var member Member
 	byIdSql := `SELECT BIN_TO_UUID(id) id, member_name, kta_number, nik_number, date_of_birth, place_of_birth, address,
-			phone_number, status, created_at, updated_at, deleted_at FROM koperasi.member WHERE ` + columnName + " = " + additionalSql
+			phone_number, status, created_at, updated_at, deleted_at FROM api25o82ny8gixl4.member WHERE ` + columnName + " = " + additionalSql
 
 	err := m.client.Get(&member, byIdSql, value)
 	if err != nil {
@@ -80,7 +80,7 @@ func (m IMemberDbAdapter) ByColumn(columnName string, value interface{}) (*Membe
 }
 
 func (m IMemberDbAdapter) Create(d Member) (*Member, *helper.AppError) {
-	sqlInsert := `INSERT INTO koperasi.member (member_name, kta_number, nik_number, date_of_birth, place_of_birth, address, business_sector, phone_number, status)  
+	sqlInsert := `INSERT INTO api25o82ny8gixl4.member (member_name, kta_number, nik_number, date_of_birth, place_of_birth, address, business_sector, phone_number, status)  
 		values (?, ?, ?, ?, ?, ?, ?, ?, ?)`
 
 	result, err := m.client.Exec(sqlInsert, d.MemberName, d.KTANumber, d.NIKNumber, d.DateOfBirth, d.PlaceOfBirth, d.Address, d.BusinessSector, d.PhoneNumber, d.Status)
@@ -102,7 +102,7 @@ func (m IMemberDbAdapter) Create(d Member) (*Member, *helper.AppError) {
 
 func (m IMemberDbAdapter) Update(d Member) *helper.AppError {
 	fmt.Println("DATA :: ", d)
-	sqlUpdate := "UPDATE koperasi.member SET "
+	sqlUpdate := "UPDATE api25o82ny8gixl4.member SET "
 	sqlWhere := "WHERE id = UUID_TO_BIN(?)"
 
 	if d.KTANumber != "" {
@@ -156,7 +156,7 @@ func (m IMemberDbAdapter) Update(d Member) *helper.AppError {
 
 func (m IMemberDbAdapter) SoftDelete(d Member) *helper.AppError {
 	fmt.Println("DATA :: ", d)
-	sqlUpdate := "UPDATE koperasi.member SET "
+	sqlUpdate := "UPDATE api25o82ny8gixl4.member SET "
 	sqlWhere := "WHERE id = UUID_TO_BIN(?)"
 
 	sqlUpdate = sqlUpdate + "updated_at = '" + d.UpdatedAt.String + "', "
