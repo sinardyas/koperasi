@@ -25,7 +25,7 @@ func openDbConnection() *sqlx.DB {
 		dbAddr = "127.0.0.1" // Default port if not specified
 	}
 
-	dbPort := os.Getenv("DB_POST")
+	dbPort := os.Getenv("DB_PORT")
 	if dbPort == "" {
 		dbPort = "3306" // Default port if not specified
 	}
