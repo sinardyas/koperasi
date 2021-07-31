@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	"github.com/sinardyas/banking/controller"
@@ -18,4 +20,8 @@ func (*Route) MemberRouterHandling(router *mux.Router, db *sqlx.DB) {
 	router.HandleFunc("/member/{member_id}", mh.GetById).Methods("GET")
 	router.HandleFunc("/member/list", mh.GetAllMember).Methods("POST")
 	router.HandleFunc("/member", mh.Create).Methods("POST")
+
+	router.HandleFunc("/ping", func(rw http.ResponseWriter, r *http.Request) {
+		rw.WriteHeader(http.StatusOK)
+	}).Methods("GET")
 }
