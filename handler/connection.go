@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -9,11 +10,30 @@ import (
 )
 
 func openDbConnection() *sqlx.DB {
-	dbUser := "root"
-	dbPasswd := "helloworld"
-	dbAddr := "127.0.0.1"
-	dbPort := "3306"
-	dbName := "koperasi"
+	dbUser := os.Getenv("DB_USER")
+	if dbUser == "" {
+		dbUser = "root" // Default port if not specified
+	}
+
+	dbPasswd := os.Getenv("DB_PASSWORD")
+	if dbPasswd == "" {
+		dbPasswd = "helloworld" // Default port if not specified
+	}
+
+	dbAddr := os.Getenv("DB_HOST")
+	if dbAddr == "" {
+		dbAddr = "127.0.0.1" // Default port if not specified
+	}
+
+	dbPort := os.Getenv("DB_POST")
+	if dbPort == "" {
+		dbPort = "3306" // Default port if not specified
+	}
+
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "koperasi" // Default port if not specified
+	}
 
 	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPasswd, dbAddr, dbPort, dbName)
 	client, err := sqlx.Open("mysql", dataSource)
