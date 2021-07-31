@@ -13,5 +13,5 @@ func Start() {
 	router := mux.NewRouter()
 	route.MemberRouterHandling(router, dbConnection)
 
-	http.ListenAndServe("localhost:3000", router)
+	http.ListenAndServe(":3000", router)
 }
